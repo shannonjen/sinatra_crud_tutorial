@@ -1,8 +1,8 @@
-# Sinatra/Rack/ActiveRecord/sqlite3 App: Simple Steps
+# Sinatra/ActiveRecord/sqlite3 App: Simple Steps
 
 "<a href="http://www.sinatrarb.com/intro.html">Sinatra</a> is a DSL for quickly creating web applications in Ruby with minimal effort"
 
-"<a href="https://rubygems.org/gems/rack">Rack</a> provides a minimal, modular and adaptable interface for developing web applications in Ruby. By wrapping HTTP requests and responses in the simplest way possible, it unifies and distills the API for web servers, web frameworks, and software in between (the so-called middleware) into a single method call."
+"<a href="https://github.com/janko-m/sinatra-activerecord">Sinatra ActiveRecord Extension</a> extends Sinatra with extension methods and Rake tasks for dealing with an SQL database using the ActiveRecord ORM."
 
 "<a href="http://guides.rubyonrails.org/active_record_basics.html">Active Record</a> is the M in MVC - the model - which is the layer of the system responsible for representing business data and logic. Active Record facilitates the creation and use of business objects whose data requires persistent storage to a database."
 
@@ -42,7 +42,7 @@ require "sinatra/activerecord"
 set :database, "sqlite3:myblogdb.sqlite3"
 ```
 
-5.) Create a Rakefile (no file extension). This file locates and loads tasks that can be run from the command line. It allows us to use migrations to set up the data model. 
+5.) Create a Rakefile (no file extension). This file locates and loads tasks that can be run from the command line.
 
 ```ruby
 #Rakefile
@@ -75,6 +75,26 @@ You can read more about Object-Relational Mapping (ORM) and Active Record <a hre
 
 1.) Use command line rake task to create a migration with the name parameter set to create_posts. You can get a list of the rake tasks by typing the rake command with a -T flag. 
 
+```bash
+$ bundle exec rake -T
+rake db:create              # Creates the database from DATABASE_URL or con...
+rake db:create_migration    # Create a migration (parameters: NAME, VERSION)
+rake db:drop                # Drops the database from DATABASE_URL or confi...
+rake db:fixtures:load       # Load fixtures into the current environment's ...
+rake db:migrate             # Migrate the database (options: VERSION=x, VER...
+rake db:migrate:status      # Display status of migrations
+rake db:rollback            # Rolls the schema back to the previous version...
+rake db:schema:cache:clear  # Clear a db/schema_cache.dump file
+rake db:schema:cache:dump   # Create a db/schema_cache.dump file
+rake db:schema:dump         # Create a db/schema.rb file that is portable a...
+rake db:schema:load         # Load a schema.rb file into the database
+rake db:seed                # Load the seed data from db/seeds.rb
+rake db:setup               # Create the database, load the schema, and ini...
+rake db:structure:dump      # Dump the database structure to db/structure.sql
+rake db:structure:load      # Recreate the databases from the structure.sql...
+rake db:version             # Retrieves the current schema version number
+```
+
 ```ruby
 $ rake db:create_migration NAME=create_posts
 ```
@@ -104,10 +124,13 @@ This change method will get called when the migration is run.
 $ rake db:migrate
 ```
 
+Because this is our first migration, the db/schema.rb file is generated. The db/schema.rb should not be altered. This file represents the up to date structure of your database and is maintained by Active Record. You can read more about Active Record migrations <a href="http://guides.rubyonrails.org/active_record_migrations.html">here</a>. 
+
 4.) Add a models.rb file to the project folder and require this file into the main application file, app.rb. In the models.rb file, create the Post class that inherits from Active Record.
 
 ```ruby
-#app.rb  
+#app.rb 
+#place after require "sinatra/activerecord"  
 require "./models.rb"
 ```
 
