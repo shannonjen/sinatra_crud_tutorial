@@ -10,46 +10,52 @@
 
 1.) Create project directory
 
-`$ mkdir building_sinatra_blog_app`
-
+```bash
+mkdir building_sinatra_blog_app
+```
 
 2.) Add a Gemfile (no file extension) that includes the gems needed for you application. This file is used by the Bundler gem.
 
-`#Gemfile`
-`source "http://rubygems.org"`
-``
-`gem "activerecord"`
-`gem "sinatra-activerecord"`
-`gem "rake"`
-`gem "sqlite3"`
+```ruby
+#Gemfile
+source "http://rubygems.org"
 
+gem "activerecord"
+gem "sinatra-activerecord"
+gem "rake"
+gem "sqlite3"
+```
 
 3.) Install the gems. This generates the Gemfile.lock file. 
 
-`$ bundle install`
-
+```bash
+bundle install
+```
 
 4.) Create the main application file (app.rb) and require in the gems (the ruby libraries) that will be used in this file and set/name the database. Notice the syntax of the second argument of the set method.
 
-`# app.rb`
-`require "sinatra"`
-`require "sinatra/activerecord"`
-``
-`set :database, "sqlite3:myblogdb.sqlite3"`
+```ruby
+# app.rb
+require "sinatra"
+require "sinatra/activerecord"
 
+set :database, "sqlite3:myblogdb.sqlite3"
+```
 
 5.) Create a Rakefile (no file extension). This file locates and loads tasks that can be run from the command line. It allows us to use migrations to set up the data model. 
 
-`#Rakefile`
-``
-`require "./app"`
-`require "sinatra/activerecord/rake"`
+```ruby
+#Rakefile
 
+require "./app"
+require "sinatra/activerecord/rake"
+```
 
 6.) Use command line rake task to create the database
 
-`$ rake db:create`
-
+```bash
+rake db:create
+```
 
 ### Part One Recap
 At this point, we have installed the necessary gems for Rake, ActiveRecord and sqlite3, created the main application file, set the database, and created a Rakefile which has allowed us to use a command line rake task to create the database.
