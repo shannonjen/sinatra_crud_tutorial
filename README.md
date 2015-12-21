@@ -14,7 +14,7 @@
 mkdir building_sinatra_blog_app
 ```
 
-2.) Add a Gemfile (no file extension) that includes the gems needed for you application. This file is used by the Bundler gem.
+2.) Add a Gemfile (no file extension) that includes the gems needed for your application. This file is used by the Bundler gem.
 
 ```ruby
 #Gemfile
@@ -32,7 +32,7 @@ gem "sqlite3"
 bundle install
 ```
 
-4.) Create the main application file (app.rb) and require in the gems (the ruby libraries) that will be used in this file and set/name the database. Notice the syntax of the second argument of the set method. 
+4.) Create the main application file (app.rb) and require in the gems that will be used in this file and set/name the database. Notice the syntax of the second argument of the set method. 
 
 ```ruby
 # app.rb
@@ -64,7 +64,7 @@ The app we want to build is a basic blog that allows a user to add a post with a
 
 ## Part Two: Model
 
-We will do two things in this step: add a posts table to the empty database and create a class called Post (an Active Record model), mapped to the posts table. This will allow us to make queries on the posts table using Active Record methods. 
+We will do two things in this step: add a posts table to the empty database and create a class called Post (an Active Record model), mapped to the posts table. This will allow us to make queries on the posts table using Active Record methods. Notice the class "Post" is singular and capitalized, while the database "posts" table is plural and lowercase.
 
 ex.
 ```ruby
@@ -124,9 +124,9 @@ This change method will get called when the migration is run.
 $ rake db:migrate
 ```
 
-Because this is our first migration, the db/schema.rb file is generated. The db/schema.rb should not be altered. This file represents the up to date structure of your database and is maintained by Active Record. You can read more about Active Record migrations <a href="http://guides.rubyonrails.org/active_record_migrations.html">here</a>. 
+Because this is our first migration, the db/schema.rb file is generated. This file should not be touched. This file represents the up to date structure of your database and is maintained by Active Record. You can read more about Active Record migrations <a href="http://guides.rubyonrails.org/active_record_migrations.html">here</a>. 
 
-4.) Add a models.rb file to the project folder and require this file into the main application file, app.rb. In the models.rb file, create the Post class that inherits from Active Record.
+4.) Add a models.rb file to the project folder and require this file into the main application file, app.rb. In the models.rb file, create the Post class (model) that inherits from Active Record.
 
 ```ruby
 #app.rb 
@@ -135,10 +135,59 @@ require "./models.rb"
 ```
 
 ```ruby
-#model.rb
+#models.rb
 class Post < ActiveRecord::Base
 end
 ```
+### Part Two Recap
+
+At this point, we have set up the app, the database, added a posts table and a Post model. Our posts table has 4 columns for title, body, created_at, and updated_at. We do not yet have any posts or a way for a user to add posts. 
+
+## Part Three: CRUD it up
+
+We do not need posts in our table to start building out our app. However, let's take a break to explore Active Record. If we require in the models.rb file, which contains our Post model, we can make queries to the database using Active Record methods. 
+
+
+1.) Start up irb and require the main app file, app.rb.
+
+```bash
+$ irb
+> require './app'
+
+2.) READ
+Use the .all method to return a collection of all records. 
+
+irb
+```bash
+> Post.all
+=> #<ActiveRecord::Relation []>
+```
+
+3.) CREATE
+Use the .create method to create and save a new record.
+
+irb
+```bash
+> Post.create(title: "Hello World!", body: "All work and no play makes Jack a dull boy") 
+=> #<Post id: 1, title: "Hello World!", body: "All work and no play makes Jack a dull boy", created_at: "2015-12-21 01:56:01", updated_at: "2015-12-21 01:56:01">
+```
+
+Or, use the .new and .save method 
+
+irb
+```bash
+post = Post.new
+post.title = "HTML-909"
+post.body = "Check out this TR-909 throwback http://html909.com/"
+post.save
+```
+
+
+
+
+
+
+
 
 
 
