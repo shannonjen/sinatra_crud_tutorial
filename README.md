@@ -145,17 +145,18 @@ At this point, we have set up the app, the database, added a posts table and a P
 
 ## Part Three: CRUD it up
 
-We do not need posts in our table to start building out our app. However, let's take a break to explore Active Record. If we require in the models.rb file, which contains our Post model, we can make queries to the database using Active Record methods. 
+We do not need posts in our table to start building out our app. However, let's take a break to explore Active Record. If we require in the models.rb file, which contains our Post model, we can make queries to the database using Active Record methods. Let's use irb to add records to our posts table.
 
 
 1.) Start up irb and require the main app file, app.rb.
 
+irb
 ```bash
-$ irb
 > require './app'
+```
 
 2.) READ
-Use the .all method to return a collection of all records. 
+Use the .all method to return a collection of all records.This table is empty.
 
 irb
 ```bash
@@ -163,7 +164,7 @@ irb
 => #<ActiveRecord::Relation []>
 ```
 
-3.) CREATE
+3.) CREATE 
 Use the .create method to create and save a new record.
 
 irb
@@ -181,27 +182,6 @@ post.title = "HTML-909"
 post.body = "Check out this TR-909 throwback http://html909.com/"
 post.save
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
