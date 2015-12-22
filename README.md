@@ -11,7 +11,7 @@
 1.) Create project directory
 
 ```bash
-mkdir building_sinatra_blog_app
+$ mkdir building_sinatra_blog_app
 ```
 
 2.) Add a Gemfile (no file extension) that includes the gems needed for your application. This file is used by the Bundler gem.
@@ -29,7 +29,7 @@ gem "sqlite3"
 3.) Install the gems. This generates the Gemfile.lock file. 
 
 ```bash
-bundle install
+$ bundle install
 ```
 
 4.) Create the main application file (app.rb) and require in the gems that will be used in this file and set/name the database. Notice the syntax of the second argument of the set method. 
@@ -54,7 +54,7 @@ require "sinatra/activerecord/rake"
 6.) Use command line rake task to create the database
 
 ```bash
-rake db:create
+$ rake db:create
 ```
 
 ### Part One Recap
