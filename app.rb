@@ -6,35 +6,44 @@ set :database, "sqlite3:myblogdb.sqlite3"
 
 require "./models"
 
+# index posts
 get '/' do
-	Post.create(title: "Hello", body: "This is a post")
 	@posts = Post.all
 	erb :index
 end
 
-get '/post' do
-	@last_post = Post.last
+# create post
+post '/post' do
+	@post = Post.create(title: params[:title], body: params[:body])
+	redirect '/'
+end
+
+# show post
+get '/post/:id' do
+	@post = Post.find(params[:id])
 	erb :post_page
 end
 
-get '/sign-in' do
-	erb :signin
+# update post
+put '/post/:id' do
+	@post = Post.find(params[:id])
+	@post.update(title: params[:title], body: params[:body])
+	@post.save
+	redirect '/post/'+params[:id]
 end
 
-post '/sign-in' do
-	@user = User.where(username: params[:username]).first
-
-	if @user.password == params[:password] 
-		redirect '/'
-
-	else
-		redirect '/sign-in'
-	end
+# delete post
+delete '/post/:id' do
+	@post = Post.find(params[:id])
+	@post.destroy
+	redirect '/'
 end
 
-get '/login-failed' do
-	"You failed!!!"
-end
+
+
+
+
+
 
 
 
