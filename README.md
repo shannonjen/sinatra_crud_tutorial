@@ -166,7 +166,9 @@ Use the .create method to create and save a new record.
 This is entered:
 Post.create(title: "Hello World!", body: "All work and no play makes Jack a dull boy") 
 This is returned:
+```bash
 #<Post id: 1, title: "Hello World!", body: "All work and no play makes Jack a dull boy", created_at: "2016-01-10 16:17:50", updated_at: "2016-01-10 16:17:50", user_id: nil>
+```
 
 NOTE: The full irb is pasted below. Take note of the irb prompt ">" and return "=>"
 ```bash
@@ -180,10 +182,10 @@ D, [2016-01-10T11:17:50.757139 #5161] DEBUG -- :    (2.0ms)  commit transaction
 Or, use the .new and .save method. The .save method is required to actualy save (persist) the record. 
 
 The commands entered into irb 
-irb(main):003:0> post = Post.new
-irb(main):004:0> post.title = "Another Post"
-irb(main):005:0> post.body = "This is another post."
-irb(main):006:0> post.save
+* irb(main):003:0> post = Post.new
+* irb(main):004:0> post.title = "Another Post"
+* irb(main):005:0> post.body = "This is another post."
+* irb(main):006:0> post.save
 
 NOTE: full irb print out pasted below:
 ```bash
@@ -200,11 +202,10 @@ D, [2016-01-10T11:18:50.447183 #5161] DEBUG -- :    (4.9ms)  commit transaction
 => true
 ```
 
-4.) READ
+4.) READ: 
 The .all method returns a collection of all records in the table. The collection is of Active Record objects and is Array-like. 
 
-NOTE: full irb print out pasted below:
-irb
+NOTE: full irb print out below:
 ```bash
 irb(main):007:0> Post.all
 D, [2016-01-10T11:19:23.567266 #5161] DEBUG -- :   Post Load (0.4ms)  SELECT "posts".* FROM "posts"
@@ -212,8 +213,7 @@ D, [2016-01-10T11:19:23.567266 #5161] DEBUG -- :   Post Load (0.4ms)  SELECT "po
 ```
 .first returns the first post as an Active Record object.
 
-NOTE: full irb print out pasted below:
-irb
+NOTE: full irb print out below:
 ```bash
 irb(main):008:0> Post.first
 D, [2016-01-10T11:19:50.455731 #5161] DEBUG -- :   Post Load (0.3ms)  SELECT  "posts".* FROM "posts"  ORDER BY "posts"."id" ASC LIMIT 1
